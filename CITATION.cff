@@ -1,0 +1,14 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: PaperTweet
+message: >-
+  If you use this software and/or datasets, please
+  cite it using the metadata from this file.
+type: dataset
+authors:
+  - given-names: Nitsan
+    family-names: Bar
+    affiliation: 'Weizmann Institute of Science, Israel'
+    orcid: 'https://orcid.org/0000-0002-3724-5082'

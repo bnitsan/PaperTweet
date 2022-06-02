@@ -1,0 +1,27 @@
+The functions train.py and inference.py take arguments.
+For train.py:
+-i <input_file>     This is the name of the dataset. For example, for <input_file>='data.csv',
+                    the program will use the train and validation sets data_train.csv and data_val.csv.
+-o <output_file>    This is a placeholder for output file, currently unused.
+-m <model_file>     This is the model name saved to file.
+-n <run_name>       This is the name provided to wandb logger.
+
+For inference.py:
+-i <input_file>     This is the name of the dataset, used as is, e.g. <input_file>='data_to_infer.csv'.
+-o <output_file>    This is a name for output file, saved under folder output_preds.
+-m <model_file>     This is the model name loaded from file.
+-n <run_name>       This flag of the run name for the logger is not currently used at inference.
+
+Many more options for the model are implemented in config.yml. With slight extra effort it is possible to
+make them less hard-coded and changeable via command line.
+
+Examples:
+
+1. Training on data/data_mid, as obtained in EDA.ipynb:
+python train.py -i data_mid -o None -m t5_base -n t5_base_1
+
+2. Inference on test dataset on resulting model
+python inference.py -i data/data_mid_test.csv -o data_mid_test_preds.csv -m t5_base -n None
+
+3. Inference on custom dataset (needs to be saved from dataframe with a column 'Abstract') custom_data.csv
+python inference.py -i data/custom_data.csv -o custom_data_pred.csv -m t5_base -n None

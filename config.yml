@@ -1,0 +1,32 @@
+config:
+    "MODEL_CLASS": "T5"                         # "BART"  or "PEGASUS" or "T5"
+    "MODEL": 't5-base'                          # model_type: t5-base/t5-large
+    "PREFIX_TO_PROMPT": "convert to tweet: "    # prefix to prompt
+    "BASELINE_PREFIX_TO_PROMPT": "summarize: "  # prefix to prompt in baseline inference
+    # "MODEL": "sshleifer/distilbart-xsum-9-6"  # others: 'google/pegasus-xsum', 't5-base'/'t5-large'
+    # "PREFIX_TO_PROMPT": ""                    # prefix to prompt BART/PEGASUS
+    # "BASELINE_PREFIX_TO_PROMPT": ""           # prefix to prompt in baseline BART/PEGASUS
+    "TRAIN_BATCH_SIZE": 1                       # training batch size
+    "TRAIN_BATCH_ACCUM": 1                      # how many batches to accumulate (PT-Lightning option)
+    "VALID_BATCH_SIZE": 1                       # validation batch size
+    "TEST_BATCH_SIZE": 1                        # test batch size
+    "TRAIN_EPOCHS": 3                           # number of training epochs
+    "LEARNING_RATE": 0.00015                    # learning rate
+    "WEIGHT_DECAY": 0.0001                      # weight decay for optimizer
+    "WARMUP_STEPS": 500                         # warmup training steps
+    "MAX_SOURCE_TEXT_LENGTH": 512               # max length of source text
+    "MAX_TARGET_TEXT_LENGTH": 512               # max length of target text
+    "MIN_TARGET_TEXT_LENGTH": 25                # min length of target text (entering in model.generate)
+    "SEED": 1                                   # set seed for reproducibility
+    "NUM_WORKERS": 6                            # number of workers in DataLoaders
+    "NUM_BEAMS": 3                              # beams in generation
+    "DATA_PATH": "data/data_mid"                # default data path
+    "SOURCE_TITLE": "Abstract"                  # title of column for source text
+    "TARGET_TITLE": "Tweets"                    # title of column for target text
+    "OUTPUT_DIR": "output_preds/"               # directory to save the predictions
+    "OUTPUT_DIR_MODELS": "output_model/"        # directory to save the model and tokenizer
+    "ADD_PROMPT_PREFIX": True                   # overall flag whether to change prompt -> prefix + prompt, e.g. prefix = "summarize: "
+    "EOS_TOKEN": ''                             # '</s>'  eos token in T5, seems redundant in the current implementation of huggingface
+    "WANDB": True                               # whether to use Weights & Biases logging
+    "SPECIAL_TOKENS_DICT": {'additional_special_tokens': ['<LINK>']}  # token list that should be added to vocabulary but removed after generation
+    "BASELINE_FLAG": True                       # overall flag on adding baseline inference

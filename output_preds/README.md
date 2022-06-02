@@ -1,0 +1,1 @@
+A directory for saving predictions of inference.
