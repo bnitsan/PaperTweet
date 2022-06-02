@@ -11,6 +11,13 @@ about document understanding from these posts, taken together with their corresp
 scientific papers? (ii) how can we take advantage of this data, e.g., can we generate
 informal summaries to new papers?
 
+- [PaperTweet](#papertweet)
+  - [Data mining](#data-mining)
+  - [Generative model](#generative-model)
+  - [Preliminary results](#preliminary-results)
+  - [Relevant literature](#relevant-literature)
+  - [Roadmap](#roadmap)
+
 
 ## Data mining
 
@@ -39,19 +46,19 @@ accessing additional paper repositories (e.g., bioRxiv, Nature, etc.),
 I am guessing that the number of examples could increase by a factor of 2-5.
 
 
-### Required packages
+### Required packages <!-- omit in toc -->
 
 In order to run a Twitter scan: 
 tweepy (updated to support Twitter API v2), urlexpander.
 
-### Initial data evaluation
+### Initial data evaluation <!-- omit in toc -->
 
 We perform an exploratory data analysis in ```EDA.ipynb```, looking for general statistical 
 properties of the data and setting it up in a single file ```data/full_data.csv```.
 
 ## Generative model
 
-We attempt to use the above dataset in a straightforward supervised learning approach -- 
+We attempt to use the above dataset in a straightforward supervised learning approach - 
 taking the abstract as input, generating a "tweet" as output, in a sort-of abstractive summarization task. 
 We adopt a pre-trained Transformer: T5-base model 
 (though it is easy to shift to larger models, including BART and PEGASUS, with sufficient resources). 
@@ -62,7 +69,7 @@ it as a baseline to compare to, i.e., we summarize an abstract and compare to a 
 "tweet". 
 
 
-### Usage
+### Usage <!-- omit in toc -->
 
 To train the model on a dataset split into (data_train.csv, data_val.csv and data_test.csv), 
 run
@@ -86,7 +93,7 @@ see ```commands.txt``` for explanation of different flags and further usage.
 ## Preliminary results
 We use a subset of the dataset, called data_mid.csv, with about 5000 examples, 
 characterized by the by mid-size Tweet-threads length, between (250, 2500) characters. 
-Most of the configuration of the model is defined in config.yml.
+Most of the configuration of the model is defined in ```config.yml```.
 
 One metric that one can use to evaluate the model is the ROUGE F-score. We show it below 
 for (i) the generated summaries of the fined-tuned model, and (ii) the generated summaries 
@@ -97,7 +104,7 @@ of a pretrained model (called "baseline").
 </p>
 
 The ROUGE-1, ROUGE-2 and ROUGE-L score are better in the fine-tuned model compared to the  
-baseline model. More evaluations are shown in evaluate_predictions.ipynb. 
+baseline model. More evaluations are shown in ```evaluate_predictions.ipynb```. 
 
 Let us show one example of a generated "tweet" (from my own paper ;-)):
 ```
@@ -120,10 +127,11 @@ Generated Baseline Summary:  the distribution of GCs in NGC5846-UDG1 is suggesti
 ```
 We see that in this particular example, both generated summaries are similar in meaning -- both extracted 
 important information from the abstract. However, the generated "Tweet" (i) has a Tweet-like prompt, i.e. 
-"paper on the arXiv today!"; (ii) although the generated "Tweet" almost copied a sentence as-is, it decomposed the 
-acronym "GCs" (appearing previously in the abstract) into "globular clusters", improving the readability of the "Tweet".
+"paper on the arXiv today!"; (ii) although the generated "Tweet" has a sentence almost copied as-is, the 
+acronym "GCs" (appearing previously in the abstract) was decomposed into "globular clusters", improving the 
+readability of the "Tweet".
 
-### Discussion
+### Discussion <!-- omit in toc -->
 The Twitter data contains a lot of "noise" such as text that is not scientifically relevant to the paper, 
 external links that are not explored and media that is not collected. We find that with sufficiently small 
 learning rate, the model can learn to summarize the abstracts of the papers, without yielding a lot of noise. 
@@ -146,11 +154,11 @@ An inexhaustive list of papers:
 
 This work can be developed in several ways and be connected to other projects. Let us list a few directions.
 
-### - Connection to other work
+### Connection to other work <!-- omit in toc -->
 The data and model could be useful for other projects such as Semantic Scholar (and similar research indexing engines) 
 and projects like [ArXiv-Miner](https://arxiv-miner.turing-bot.com/#/README).
 
-### - Mining papers beyond abstract
+### Mining papers beyond abstract <!-- omit in toc -->
 
 So far we restricted ourselves to analyzing only the abstract part of the paper. 
 This has two reasons:
@@ -162,14 +170,14 @@ might be comparable or better).
 
 To parse arXiv papers, good directions may be [this](https://github.com/alvinwan/texsoup) and [this](https://github.com/valayDave/arxiv-miner/).
 
-### - Mining tweets beyond text
+### Mining tweets beyond text <!-- omit in toc -->
 
 We have only mined the textual part of tweets, ignoring external links, images and videos. These could also be leveraged.
 
-## Acknowledgements
+## Acknowledgements <!-- omit in toc -->
 I thank Dana Cohen and Tomer Ronen for useful discussions.
 
-## License
+## License <!-- omit in toc -->
 
 This code is under [MIT](https://opensource.org/licenses/MIT) license. 
 
